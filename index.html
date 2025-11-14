@@ -3,103 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pregunta</title>
+    <title>¿Quieres salir conmigo, Mariana? 💖</title>
 
     <style>
         body {
             margin: 0;
             padding: 0;
-            background-color: #f7f7f7;
-            font-family: Arial, sans-serif;
+            background-color: #f5e1ff; /* Morado pastel */
+            font-family: "Arial", sans-serif;
             text-align: center;
         }
 
         .container {
-            margin-top: 60px;
-            padding: 20px;
+            margin-top: 40px;
+            padding: 10px;
         }
 
         img {
-            width: 220px;
-            margin-bottom: 15px;
+            width: 60%;
+            max-width: 250px;
         }
 
         h1 {
             font-size: 28px;
-            color: #333;
-            margin-bottom: 10px;
+            color: #4b007a; /* Morado oscuro */
+            padding: 0 10px;
         }
 
         p {
-            margin-top: -5px;
             font-size: 16px;
-            color: #666;
+            color: #6b2d8f; /* Morado medio */
+            padding: 0 15px;
         }
 
-        .btn {
-            padding: 12px 35px;
+        button {
+            padding: 14px 40px;
             margin: 15px;
-            font-size: 18px;
+            font-size: 20px;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             cursor: pointer;
             transition: 0.2s;
         }
 
         #si {
-            background-color: #8bc34a;
-            color: #fff;
+            background-color: #a64bf4; /* Morado brillante */
+            color: white;
+            position: relative; /* Se queda fijo */
         }
 
         #si:hover {
-            background-color: #7cb342;
+            background-color: #8d38db;
         }
 
         #no {
-            background-color: #e0e0e0;
-            color: #333;
-            position: relative;
+            background-color: #d8bafc; /* Morado clarito */
+            color: #4b007a;
+            position: absolute; /* Para poder moverlo */
+        }
+
+        #no:hover {
+            background-color: #c59afc;
         }
     </style>
 </head>
+
 <body>
 
-<div class="container">
-    <img src="https://media.tenor.com/v5x4IcdOx6wAAAAi/cute-cat.gif" alt="gatito">
-    <h1>Pregunta seria:</h1>
-    <p>Responde con sinceridad.</p>
+    <audio id="bg-music" autoplay loop>
+        <source src="musica.mp3" type="audio/mpeg">
+    </audio>
 
-    <button id="si" class="btn">Sí</button>
-    <button id="no" class="btn">No</button>
-</div>
+    <div class="container" id="main-content">
+        <img src="https://media.tenor.com/v5x4IcdOx6wAAAAi/cute-cat.gif" alt="gatito">
+        <h1>Mariana, ¿puedo salir contigo? 💖</h1>
+        <p>No soy la gran cosa, pero si me das una oportunidad... te haré muy feliz 💗</p>
 
-<script>
-    const btnNo = document.getElementById("no");
-    const btnSi = document.getElementById("si");
+        <button id="si">SI 💘</button>
+        <button id="no">NO 😭</button>
+    </div>
 
-    // Mover botón NO infinitamente al tocar o pasar por encima
-    function moverBoton() {
-        const x = Math.random() * (window.innerWidth - 80);
-        const y = Math.random() * (window.innerHeight - 80);
-        btnNo.style.position = "absolute";
-        btnNo.style.left = x + "px";
-        btnNo.style.top = y + "px";
-    }
+    <script>
+        const btnNo = document.getElementById("no");
+        const btnSi = document.getElementById("si");
 
-    btnNo.addEventListener("mouseover", moverBoton);
-    btnNo.addEventListener("touchstart", moverBoton);
+        function moverBoton() {
+            const maxX = window.innerWidth - btnNo.offsetWidth;
+            const maxY = window.innerHeight - btnNo.offsetHeight;
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
 
-    // Botón SI cambia la pantalla
-    btnSi.addEventListener("click", () => {
-        document.body.innerHTML = `
-            <div style="margin-top: 100px; text-align: center;">
-                <h1>Perfecto.</h1>
-                <p>Respuesta registrada.</p>
-                <img src="https://media.tenor.com/g8o0c0Qj7WAAAAAi/cat-love.gif" width="200">
+            btnNo.style.left = randomX + "px";
+            btnNo.style.top = randomY + "px";
+        }
+
+        // PC
+        btnNo.addEventListener("mouseover", moverBoton);
+
+        // CELULAR
+        btnNo.addEventListener("touchstart", (e) => {
+            e.preventDefault();
+            moverBoton();
+        });
+
+        // Botón SI (no se mueve)
+        btnSi.addEventListener("click", () => {
+            document.body.innerHTML = `
+            <div style="margin-top: 70px; padding: 15px; color:#4b007a;">
+                <h1 style="font-size: 28px;">Te amo 💞</h1>
+                <p style="font-size: 18px;">Gracias por decir que sí, Mariana.</p>
+
+                <img src="FOTO-DE-LOS-DOS.jpg" style="width:70%; max-width:300px; border-radius:15px; margin-top:20px;">
+
+                <div style="margin-top:25px; font-size:18px; line-height:1.5; padding:10px;">
+                    <p>[Aquí va tu carta de dos páginas]</p>
+                </div>
+
+                <img src="https://media.tenor.com/g8o0c0Qj7WAAAAAi/cat-love.gif" style="width:55%; max-width:250px;">
             </div>
-        `;
-    });
-</script>
+            `;
+        });
+    </script>
 
 </body>
 </html>
