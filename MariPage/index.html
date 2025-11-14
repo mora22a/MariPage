@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quieres salir conmigo, Mariana? 💖</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #fff6f6;
+            font-family: "Arial", sans-serif;
+            text-align: center;
+        }
+
+        .container {
+            margin-top: 40px;
+            padding: 10px;
+        }
+
+        img {
+            width: 60%;
+            max-width: 250px;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #333;
+            padding: 0 10px;
+        }
+
+        p {
+            font-size: 16px;
+            color: #555;
+            padding: 0 15px;
+        }
+
+        button {
+            padding: 14px 40px;
+            margin: 15px;
+            font-size: 20px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        #si {
+            background-color: #ff8fab;
+            color: white;
+        }
+
+        #si:hover {
+            background-color: #ff5d85;
+        }
+
+        #no {
+            background-color: #d3d3d3;
+            color: #333;
+            position: absolute;
+        }
+
+        #no:hover {
+            background-color: #bfbfbf;
+        }
+    </style>
+</head>
+
+<body>
+
+    <audio id="bg-music" autoplay loop>
+        <source src="musica.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container" id="main-content">
+        <img src="https://media.tenor.com/v5x4IcdOx6wAAAAi/cute-cat.gif" alt="gatito">
+        <h1>Mariana, ¿puedo salir contigo? 🥺💖</h1>
+        <p>No soy la gran cosa, pero si me das una oportunidad... te haré muy feliz 💗</p>
+
+        <button id="si">SI 💘</button>
+        <button id="no">NO 😭</button>
+    </div>
+
+    <script>
+        const btnNo = document.getElementById("no");
+        const btnSi = document.getElementById("si");
+
+        function moverBoton() {
+            const maxX = window.innerWidth - btnNo.offsetWidth;
+            const maxY = window.innerHeight - btnNo.offsetHeight;
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+
+            btnNo.style.left = randomX + "px";
+            btnNo.style.top = randomY + "px";
+        }
+
+        // Para PC
+        btnNo.addEventListener("mouseover", moverBoton);
+
+        // Para CELULAR (touch)
+        btnNo.addEventListener("touchstart", (e) => {
+            e.preventDefault();
+            moverBoton();
+        });
+
+        // Botón SI
+        btnSi.addEventListener("click", () => {
+            document.body.innerHTML = `
+            <div style="margin-top: 70px; padding: 15px;">
+                <h1 style="font-size: 28px;">Te amo mi amor 💞</h1>
+                <p style="font-size: 18px; color:#333;">Gracias por decir que sí, Mariana 💖</p>
+
+                <img src="FOTO-DE-LOS-DOS.jpg" style="width:70%; max-width:300px; border-radius:15px; margin-top:20px;">
+
+                <div style="margin-top:25px; font-size:18px; color:#444; line-height:1.5; padding:10px;">
+                    <!-- Aquí pegas tu carta de dos páginas -->
+                    <p>
+                        [Aquí va tu carta romántica con <br> para saltos de línea]
+                    </p>
+                </div>
+
+                <img src="https://media.tenor.com/g8o0c0Qj7WAAAAAi/cat-love.gif" style="width:55%; max-width:250px;">
+            </div>
+            `;
+        });
+    </script>
+
+</body>
+</html>
