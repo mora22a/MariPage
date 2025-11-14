@@ -12,6 +12,7 @@
             background-color: #f5e1ff; /* Morado pastel */
             font-family: "Arial", sans-serif;
             text-align: center;
+            overflow-x: hidden;
         }
 
         .container {
@@ -47,9 +48,10 @@
         }
 
         #si {
-            background-color: #a64bf4; /* Morado brillante */
+            background-color: #a64bf4;
             color: white;
-            position: relative; /* Se queda fijo */
+            display: block;
+            margin: 20px auto 10px auto;
         }
 
         #si:hover {
@@ -57,9 +59,11 @@
         }
 
         #no {
-            background-color: #d8bafc; /* Morado clarito */
+            background-color: #d8bafc;
             color: #4b007a;
-            position: absolute; /* Para poder moverlo */
+            position: relative;
+            display: block;
+            margin: 120px auto 0 auto; /* Lo pone abajo */
         }
 
         #no:hover {
@@ -76,10 +80,12 @@
 
     <div class="container" id="main-content">
         <img src="https://media.tenor.com/v5x4IcdOx6wAAAAi/cute-cat.gif" alt="gatito">
-        <h1>Mariana, ¿Me amas? 💖</h1>
-        <p>Si tu respuesta es sí, me quedo contigo. Si es no… bueno, ese botón no te va a dejar escaparte.</p>
-        <p>Ya es demasiado tarde para huir 🤭💗✨</p>
 
+        <h1>Mariana, ¿Me amas? 💖</h1>
+
+        <p>Si tu respuesta es sí, me quedo contigo. Si es no… bueno, ese botón no te va a dejar escaparte.</p>
+
+        <p>Ya es demasiado tarde para huir 🤭💗✨</p>
 
         <button id="si">SI 💘</button>
         <button id="no">NO 😭</button>
@@ -99,16 +105,19 @@
             btnNo.style.top = randomY + "px";
         }
 
-        // PC
-        btnNo.addEventListener("mouseover", moverBoton);
-
-        // CELULAR
-        btnNo.addEventListener("touchstart", (e) => {
-            e.preventDefault();
+        // Activamos movimiento solo cuando lo intentan presionar
+        btnNo.addEventListener("mouseover", () => {
+            btnNo.style.position = "absolute";
             moverBoton();
         });
 
-        // Botón SI (no se mueve)
+        btnNo.addEventListener("touchstart", (e) => {
+            e.preventDefault();
+            btnNo.style.position = "absolute";
+            moverBoton();
+        });
+
+        // Botón SI (pantalla final)
         btnSi.addEventListener("click", () => {
             document.body.innerHTML = `
             <div style="margin-top: 70px; padding: 15px; color:#4b007a;">
