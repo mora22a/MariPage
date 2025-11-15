@@ -45,13 +45,16 @@
             border-radius: 12px;
             cursor: pointer;
             transition: 0.2s;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         #si {
-            background-color: #a64bf4;
+            background-color: #a64bf4; /* Morado brillante */
             color: white;
-            display: block;
-            margin: 20px auto 10px auto;
+            position: relative;
+            margin-top: 20px;
         }
 
         #si:hover {
@@ -59,11 +62,12 @@
         }
 
         #no {
-            background-color: #d8bafc;
+            background-color: #d8bafc; /* Morado clarito */
             color: #4b007a;
-            position: relative;
-            display: block;
-            margin: 20px auto 0 auto; /* Lo pone abajo */
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 20px;
         }
 
         #no:hover {
@@ -74,8 +78,9 @@
 
 <body>
 
+    <!-- MÚSICA AUTOMÁTICA -->
     <audio id="bg-music" autoplay loop>
-        <source src="perfect-instrumental.mp3" type="audio/mpeg">
+        <source src="Musica/perfect-instrumental.mp3" type="audio/mpeg">
     </audio>
 
     <div class="container" id="main-content">
@@ -84,10 +89,12 @@
         <h1>Mariana, ¿Me amas? 💖</h1>
 
         <p>Si tu respuesta es sí, me quedo contigo. Si es no… bueno, ese botón no te va a dejar escaparte.</p>
-
         <p>Ya es demasiado tarde para huir 🤭💗✨</p>
 
+        <!-- Botón SI arriba -->
         <button id="si">SI 💘</button>
+
+        <!-- Botón NO abajo, movible -->
         <button id="no">NO 😭</button>
     </div>
 
@@ -98,6 +105,7 @@
         function moverBoton() {
             const maxX = window.innerWidth - btnNo.offsetWidth;
             const maxY = window.innerHeight - btnNo.offsetHeight;
+
             const randomX = Math.random() * maxX;
             const randomY = Math.random() * maxY;
 
@@ -105,34 +113,18 @@
             btnNo.style.top = randomY + "px";
         }
 
-        // Activamos movimiento solo cuando lo intentan presionar
-        btnNo.addEventListener("mouseover", () => {
-            btnNo.style.position = "absolute";
-            moverBoton();
-        });
+        /* PC */
+        btnNo.addEventListener("mouseover", moverBoton);
 
+        /* CELULAR */
         btnNo.addEventListener("touchstart", (e) => {
             e.preventDefault();
-            btnNo.style.position = "absolute";
             moverBoton();
         });
 
-        // Botón SI (pantalla final)
+        /* Botón SI: abre carta.html */
         btnSi.addEventListener("click", () => {
-            document.body.innerHTML = `
-            <div style="margin-top: 70px; padding: 15px; color:#4b007a;">
-                <h1 style="font-size: 28px;">Te amo 💞</h1>
-                <p style="font-size: 18px;">Sabia que dirias que sí</p>
-
-                <img src="FOTO-DE-LOS-DOS.jpg" style="width:70%; max-width:300px; border-radius:15px; margin-top:20px;">
-
-                <div style="margin-top:25px; font-size:18px; line-height:1.5; padding:10px;">
-                    <p>[Aquí va tu carta de dos páginas]</p>
-                </div>
-
-                <img src="https://media.tenor.com/g8o0c0Qj7WAAAAAi/cat-love.gif" style="width:55%; max-width:250px;">
-            </div>
-            `;
+            window.location.href = "carta.html";
         });
     </script>
 
